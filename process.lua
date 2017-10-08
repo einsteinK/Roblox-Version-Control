@@ -1,8 +1,6 @@
 
 --print("[Pre-commit] Starting reference replacement")
 
-local lfs = require("lfs")
-
 do -- XML
 	function parseargs(s)
 	  local arg = {}
@@ -51,20 +49,6 @@ do -- XML
 		error("unclosed "..stack[#stack].label)
 	  end
 	  return stack[1]
-	end
-end
-
-local function iterate(path,func)
-	for file in lfs.dir(path) do
-		if file:sub(1,1) ~= "." then
-			file = path.."\\"..file
-			local attr = lfs.attributes(file)
-			if attr.mode == "directory" then
-				iterate(file,func)
-			else
-				func(file)
-			end
-		end
 	end
 end
 
@@ -168,17 +152,6 @@ local function clense(path)
 end
 
 local failed = false
---[[
-iterate(lfs.currentdir(),function(p)
-	if p:sub(-6) == ".rbxlx" or p:sub(-6) == ".rbxmx" then
-		local s,e = pcall(clense,p)
-		if not s then
-			e = e:gsub("\n","\n\t") failed = true
-			io.stdout:write("[Pre-Commit] Clensing failed:\n\t"..e.."\n")
-			io.stdout:write("\tDoes the file not contain proper ROBLOX XML format?")
-		end
-	end
-end)]]
 
 for p in io.stdin:lines() do
 	if p:sub(-6) == ".rbxlx" or p:sub(-6) == ".rbxmx" then
