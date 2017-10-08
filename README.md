@@ -39,3 +39,7 @@ Original file gets overwritten with the new XML, which is robbed of some of its 
 Pre-commit will re-`git add` every staged .rbxmx / .rbxlx file (leading to patch commits breaking)
 
 If after processing the .rbxmx / .rbxlx files there seems to be no changes anymore, the commit is cancelled, even if you used the `--allow-empty` option. Otherwise, if everything went well, pre-commit returns error code 0, which lets the commit process continue.
+
+### Showcase
+
+[![Git hook for roblox version control](https://img.youtube.com/vi/ykXK5vCz46o/0.jpg)](https://www.youtube.com/watch?v=ykXK5vCz46o "Git hook for roblox version control")
